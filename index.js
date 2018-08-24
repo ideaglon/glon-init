@@ -1,3 +1,3 @@
 'use strict';
 
-console.log('glon-init');
+module.exports = require('./src');

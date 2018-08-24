@@ -1,12 +1,22 @@
 {
   "name": "glon-init",
   "version": "1.0.0",
-  "description": "",
+  "description": "glon project generator",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "pitaya <cnzhejiang@qq.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "download": "^7.1.0",
+    "ejs": "^2.6.1",
+    "git-config": "^0.0.7",
+    "glob": "^7.1.2",
+    "inquirer": "^6.2.0",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.2"
+  }
 }
