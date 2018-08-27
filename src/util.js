@@ -92,13 +92,13 @@ var util = {
   makeFiles: function(sourceDir, targetDir, data, filter, callback, cwd) {
         console.log('\nStart to copy files ...\n');
         var prompts = [];
-
+        var promptsUrl = {};
         // traverse all template files
         glob.sync('**', {
             cwd: sourceDir,
             nodir: true,
             dot: true
-        }).forEach(function(source) {
+        }).forEach(function(source, index) {
             console.log('source',source)
             // filter out files
             if (filter && filter(source, data) === false) {
@@ -125,22 +125,23 @@ var util = {
             source = path.join(sourceDir, source);
 
             try {
-
+                
                 // file exists, push to confirm list
                 fs.statSync(target);
+                promptsUrl['file' + index] = source + ',' + target;
                 prompts.push({
                     type: 'confirm',
-                    name: source + ',' + target,
+                    name: 'file' + index,
                     message: 'Override ' + target + ' ?'
                 });
-
+                
             } catch (e) {
 
                 // file not exist, just write
                 writeFile(source, target, data);
             }
         });
-
+       
         if (prompts.length) {
 
         // blank line
@@ -151,11 +152,10 @@ var util = {
 
             // blank line
             console.log('');
-
             // write confirmed files
             for (var k in answers) {
                 if (answers[k]) {
-                    var p = k.split(',');
+                    var p = promptsUrl[k].split(',');
                     writeFile(p[0], p[1], data);
                 }
             }
