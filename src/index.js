@@ -21,15 +21,15 @@ module.exports = {
         var force = command.force;
         var alias = command.as;
         var cwd = command.cwd;
-    
+      
         // template should be an url or a local dir
         if (!/^https?:\/\//.test(template) && !util.existsDirectory(template)) {
           console.error('Can not load template: ' + template);
           return;
         }
-    
+      
         // generate a project if type is proj or alias to an url or is a local dir
-        if (type === 'proj' || /^https?:\/\//.test(template) || util.existsDirectory(type)) {
+        if ((type !== 'mod' && type !== 'page') && (type === 'proj' || /^https?:\/\//.test(util.getAlias(type)) || util.existsDirectory(type))) {
           proj(template, force);
         } else {
           mod(type, template, force, cwd);

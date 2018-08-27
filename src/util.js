@@ -36,7 +36,11 @@ var util = {
     
     // alias getter
     getAlias: function(key) {
-        return readAliasFile()[key] || key;
+        if (key === 'mod' || key === 'page') {
+            return util.loadAbc().options.template;
+        } else {
+            return readAliasFile()[key] || key;
+        }
     },
 
     // file exists and is directory
@@ -44,7 +48,7 @@ var util = {
         try {
             return fs.statSync(target).isDirectory();
         } catch (err) {
-        return false;
+            return false;
         }
     },
 
@@ -216,7 +220,6 @@ var util = {
             };
             fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, '  '));
 
-            console.log('tpldirtpldir', tpldir);
             callback(tpldir);
         }).catch(function(err) {
 
