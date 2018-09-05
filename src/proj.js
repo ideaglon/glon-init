@@ -126,7 +126,7 @@ function getNpmRegistry(npm) {
   
   // build libraries
   function buildLibraries(cwd) {
-    spawn(process.platform === 'win32' ? 'nowa.cmd' : 'nowa', [
+    spawn(process.platform === 'win32' ? 'wiwi.cmd' : 'wiwi', [
       'lib'
     ], {
       cwd: root,

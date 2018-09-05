@@ -272,4 +272,4 @@ function writeAliasFile(template) {
     } catch(e) {
     }
     return template;
-  }
+}
